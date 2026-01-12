@@ -1,14 +1,11 @@
 [app]
-title = My Folder Tool
-package.name = foldertool
-package.domain = org.sanjai
+title = My App
+package.name = myflaskapp
+package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,html,css,js,txt,db
 version = 0.1
-
-# Requirements must include kivy and flask
-requirements = python3,kivy==2.1.0,flask,flask-cors,android,requests
-
+requirements = python3,kivy==2.1.0,flask,flask-cors,android
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET
