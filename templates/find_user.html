@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Find Username</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: white; padding: 40px; border-radius: 10px; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #333; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #17a2b8; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: #138496; }
+        .links { margin-top: 20px; font-size: 14px; }
+        a { text-decoration: none; color: #007bff; }
+        .result { margin-top: 20px; padding: 10px; background: #d4edda; color: #155724; border-radius: 5px; border: 1px solid #c3e6cb; }
+        .error { color: #dc3545; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>🔍 Find Username</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="number" name="mobile" placeholder="Enter Mobile Number" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if found_name %}
+            <div class="result">
+                <strong>Username Found:</strong><br>
+                <span style="font-size: 20px; font-weight: bold;">{{ found_name }}</span>
+            </div>
+        {% endif %}
+
+        <div class="links">
+            <a href="/login">⬅ Back to Login</a>
+        </div>
+    </div>
+</body>
+</html>
