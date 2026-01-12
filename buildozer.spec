@@ -1,11 +1,14 @@
 [app]
 title = My Folder Tool
 package.name = foldertool
-package.domain = org.test
+package.domain = org.sanjai
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,html,css,js,txt,db
 version = 0.1
-requirements = python3,kivy,flask,flask-cors,android
+
+# Requirements must include kivy and flask
+requirements = python3,kivy==2.1.0,flask,flask-cors,android,requests
+
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET

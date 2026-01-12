@@ -2,24 +2,25 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 import threading
-import app # This imports your app.py
+import time
+import app # This must match your app.py filename
 
-class FlaskAndroidApp(App):
+class AndroidFlask(App):
     def build(self):
+        # Start Flask in the background so it doesn't freeze the App
+        webapp_thread = threading.Thread(target=self.start_flask)
+        webapp_thread.daemon = True
+        webapp_thread.start()
+
         layout = BoxLayout()
-        # Simple text to show app is running
-        self.label = Label(text="Server starting on Port 5000...", font_size='20sp')
-        layout.add_widget(self.label)
-        
-        # Run Flask in a background thread
-        server_thread = threading.Thread(target=self.start_server)
-        server_thread.daemon = True
-        server_thread.start()
+        # This shows while the server is starting
+        self.lbl = Label(text="Starting Local Server...\nOpen localhost:5000 in your browser if screen is blank", halign="center")
+        layout.add_widget(self.lbl)
         return layout
 
-    def start_server(self):
-        # Host 0.0.0.0 is important for Android
-        app.app.run(host='0.0.0.0', port=5000)
+    def start_flask(self):
+        # Android requires 0.0.0.0 to allow internal connections
+        app.app.run(host='0.0.0.0', port=5000, debug=False)
 
 if __name__ == '__main__':
-    FlaskAndroidApp().run()
+    AndroidFlask().run()

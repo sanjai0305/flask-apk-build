@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Cleans space to prevent "Out of disk space" errors
+      # This step fixes the "disk space" issue common in GitHub Actions
       - name: Free Disk Space
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -15,8 +15,9 @@ jobs:
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
+      # We use a specific version of buildozer to avoid the "invalid user" error
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+        uses: ArtemSBulgakov/buildozer-action@v1.2.0
         id: buildozer
         with:
           command: buildozer android debug
